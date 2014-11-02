@@ -1,0 +1,5 @@
+---
+- name: all
+  hosts: all
+  roles:
+    - users

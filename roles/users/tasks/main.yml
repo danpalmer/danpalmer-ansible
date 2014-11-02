@@ -1,0 +1,30 @@
+---
+  - name: Create users
+    action: user
+      name={{ item }}
+      state=present
+      generate_ssh_key=yes
+      shell=/bin/bash
+    with_items:
+      users
+
+  - name: Grant superuser access
+    action: user
+      name={{ item }}
+      state=present
+      groups=sudo
+      append=yes
+      generate_ssh_key=yes
+      shell=/bin/bash
+    with_items:
+      users
+
+  - name: ~/.ssh/authorized_keys
+    action: copy
+      src=authorized_keys/{{ item }}
+      dest=/home/{{ item }}/.ssh/authorized_keys
+      mode=0600
+      owner={{ item }}
+      group={{ item }}
+    with_items:
+      users
