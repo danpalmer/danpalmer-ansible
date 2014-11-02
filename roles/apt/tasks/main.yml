@@ -1,0 +1,22 @@
+---
+  - name: Packages
+    action: apt
+      pkg={{ item }}
+      update_cache=yes
+      default_release=wheezy
+      cache_valid_time=86400
+    with_items:
+      - bzip2
+      - ca-certificates
+      - curl
+      - git
+      - htop
+      - ipython
+      - lsof
+      - mosh
+      - nmap
+      - telnet
+      - tig
+      - tree
+      - unzip
+      - zsh
