@@ -1,0 +1,11 @@
+---
+
+nginx_sites:
+  - server:
+      name: winscifest
+      server_name: winchesterscifest.org
+      location:
+        name: "/"
+        root: "{{nginx_www_dir}}/winscifest"
+        try_files: "$uri $uri/ /index.html"
+        sendfile: "on"
