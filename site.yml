@@ -4,5 +4,6 @@
   roles:
     - users
     - apt
-    - postgresql
+    - ANXS.postgresql
+    - ANXS.nginx
     - danpalmer-me
