@@ -4,7 +4,3 @@
   roles:
     - users
     - apt
-    - ANXS.postgresql
-    - ANXS.nginx
-    - winscifest
-    - danpalmer-me
