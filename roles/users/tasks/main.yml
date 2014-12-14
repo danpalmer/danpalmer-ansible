@@ -19,6 +19,10 @@
     with_items:
       users
 
+  - lineinfile: "dest=/etc/sudoers state=present regexp='^{{ item }}' line='{{ item }} ALL=(ALL) NOPASSWD: ALL'"
+    with_items:
+      users
+
   - name: ~/.ssh/authorized_keys
     action: copy
       src=authorized_keys/{{ item }}
