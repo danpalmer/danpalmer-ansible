@@ -13,8 +13,9 @@
   sudo: yes
   with_items:
     - git
-    - python-dev
+    - python3-dev
     - libpq-dev
+    - libffi-dev
     - python-virtualenv
     - nginx
     - supervisor

@@ -8,7 +8,7 @@
   copy: src=ssh_conf/known_hosts dest={{ssh_dir}}/known_hosts
 
 - name: checkout application if not already existing
-  git: repo={{code_repository}} dest={{app_code_dir}} update=no
+  git: repo={{code_repository}} dest={{app_code_dir}} force=yes depth=1
   sudo: yes
   sudo_user: deploy
 
@@ -25,11 +25,11 @@
        virtualenv={{virtualenv_dir}}
 
 - name: check if app/static directory exists
-  stat: path={{app_code_dir}}/static
+  stat: path={{app_code_dir}}/{{staticfiles_dir}}
   register: static_dir
 
 - name: create static directory for Django app if it does not exist
-  command: mkdir {{app_code_dir}}/static
+  command: mkdir {{app_code_dir}}/{{staticfiles_dir}}
   when: static_dir.stat.isdir is not defined
 
 - name: Django collectstatic
@@ -54,10 +54,10 @@
                  settings={{django_settings}}
   environment: django_env_vars
 
-- name: Django loaddata
-  django_manage: command=loaddata
-                 app_path={{app_code_dir}}
-                 virtualenv={{virtualenv_dir}}
-                 fixtures={{fixtures_file}}
-                 settings={{django_settings}}
-  environment: django_env_vars
+# - name: Django loaddata
+#   django_manage: command=loaddata
+#                  app_path={{app_code_dir}}
+#                  virtualenv={{virtualenv_dir}}
+#                  fixtures={{fixtures_file}}
+#                  settings={{django_settings}}
+#   environment: django_env_vars

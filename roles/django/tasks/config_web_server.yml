@@ -30,7 +30,7 @@
   when: not deploy_ssl
 
 - name: write ssl certificate key
-  template: src=ssl_cert/{{app_name}}.key 
+  template: src=ssl_cert/{{app_name}}.key
             dest=/etc/nginx/{{app_name}}/{{app_name}}.key
   sudo: yes
   when: deploy_ssl

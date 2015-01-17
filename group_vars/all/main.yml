@@ -12,13 +12,14 @@ apt_packages:
   - lsof
   - mosh
   - nmap
-  - telnet
   - tig
   - tree
   - unzip
   - zsh
-  - python3
   - fail2ban
+  - libxml2-dev
+  - libxslt1-dev
+  - build-essential
 
 hostname: "danpalmer.me"
 
@@ -27,20 +28,21 @@ postgresql_databases:
 
 
 app_name: danpalmer
-django_settings_dir_name:
-django_settings: danpalmer.settings
-code_repository: ssh://git@github.com/danpalmer/danpalmer.git
 deploy_user: deploy
-virtualenv_dir: /home/{{ deploy_user }}/{{ app_name }}/env
+
+dbname: "{{ app_name }}"
+dbuser: "{{ deploy_user }}"
+
+root_domain_name: danpalmer.me
+
+deploy_ssl: false
+code_repository: ssh://git@github.com/danpalmer/danpalmer.git
+virtualenv_dir: /home/{{ deploy_user }}/virtualenvs/{{ app_name }}/env
 app_code_dir: /home/{{ deploy_user }}/{{ app_name }}
 requirements_file: "{{ app_code_dir }}/requirements.txt"
-# fixtures_file: "{{app_code_dir}}/core/fixtures/prod.json"
 ssh_dir: /home/{{ deploy_user }}/.ssh
-root_domain_name: danpalmer.me
-deploy_ssl: false
-django_env_vars: {
-    DEBUG: True,
-    DATABASE_URL: '', # ex: postgres://deployer@127.0.0.1:5432/dbname'
-    STATIC_URL: '/static/',
-    SECRET_KEY: '',
-}
+# fixtures_file: "{{app_code_dir}}/core/fixtures/prod.json"
+
+django_settings_dir_name:
+django_settings: danpalmer.settings
+staticfiles_dir: staticfiles
