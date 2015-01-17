@@ -21,4 +21,8 @@
     - supervisor
     - postgresql-client-common
     - postgresql-client
-
+    - libcairo2
+    - libpango1.0-0
+    - libgdk-pixbuf2.0-0
+    - shared-mime-info
+    - python-gtk2
