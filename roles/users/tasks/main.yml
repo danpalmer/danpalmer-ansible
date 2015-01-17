@@ -32,3 +32,19 @@
       group={{ item }}
     with_items:
       users
+
+  - name: Copy GitHub deploy public key
+    action: copy
+      content="{{ deploy_ssh_key_pub }}"
+      dest=/home/deploy/.ssh/id_rsa.pub
+      mode=0600
+      owner=deploy
+      group=deploy
+
+  - name: Copy GitHub deploy private key
+    action: copy
+      content="{{ deploy_ssh_key }}"
+      dest=/home/deploy/.ssh/id_rsa
+      mode=0600
+      owner=deploy
+      group=deploy
