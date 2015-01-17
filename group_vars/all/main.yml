@@ -43,6 +43,6 @@ requirements_file: "{{ app_code_dir }}/requirements.txt"
 ssh_dir: /home/{{ deploy_user }}/.ssh
 # fixtures_file: "{{app_code_dir}}/core/fixtures/prod.json"
 
-django_settings_dir_name:
-django_settings: danpalmer.settings
+django_settings_dir_name: "{{ app_name }}"
+django_settings: "{{ app_name }}.settings"
 staticfiles_dir: staticfiles
