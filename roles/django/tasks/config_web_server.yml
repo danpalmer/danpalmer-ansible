@@ -18,7 +18,7 @@
   template: src=ssl_cert/{{app_name}}.sslchain.crt dest=/etc/nginx/{{app_name}}/{{app_name}}.sslchain.crt
   sudo: yes
   when: deploy_ssl
-  
+
 - name: write SSL nginx configuration
   template: src=nginx_ssl.conf.j2 dest=/etc/nginx/conf.d/{{app_name}}.conf
   sudo: yes
