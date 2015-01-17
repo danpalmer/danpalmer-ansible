@@ -1,6 +1,46 @@
-hostname: "apps.danpalmer.me"
-dokku_vhost: "{{ hostname }}"
-dokku_version: "0.3.9"
-dokku_plugins: []
 users:
   - dan
+  - deploy
+
+apt_packages:
+  - bzip2
+  - ca-certificates
+  - curl
+  - git
+  - htop
+  - ipython
+  - lsof
+  - mosh
+  - nmap
+  - telnet
+  - tig
+  - tree
+  - unzip
+  - zsh
+  - python3
+  - fail2ban
+
+hostname: "danpalmer.me"
+
+postgresql_databases:
+  - name: danpalmer
+
+
+app_name: danpalmer
+django_settings_dir_name:
+django_settings: danpalmer.settings
+code_repository: ssh://git@github.com:danpalmer/danpalmer.git
+deploy_user: deploy
+virtualenv_dir: /home/{{deploy_user}}/venvs/{{app_name}}
+app_code_dir: /home/{{deploy_user}}/{{app_name}}
+requirements_file: "{{app_code_dir}}/requirements.txt"
+# fixtures_file: "{{app_code_dir}}/core/fixtures/prod.json"
+ssh_dir: /home/{{deploy_user}}/.ssh
+root_domain_name: danpalmer.me
+deploy_ssl: false
+django_env_vars: {
+    DEBUG: True,
+    DATABASE_URL: '', # ex: postgres://deployer@127.0.0.1:5432/dbname'
+    STATIC_URL: '/static/',
+    SECRET_KEY: '',
+}

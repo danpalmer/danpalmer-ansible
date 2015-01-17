@@ -5,17 +5,4 @@
       update_cache=yes
       cache_valid_time=86400
     with_items:
-      - bzip2
-      - ca-certificates
-      - curl
-      - git
-      - htop
-      - ipython
-      - lsof
-      - mosh
-      - nmap
-      - telnet
-      - tig
-      - tree
-      - unzip
-      - zsh
+      - "{{ apt_packages }}"

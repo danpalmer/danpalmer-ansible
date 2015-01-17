@@ -4,4 +4,7 @@
   roles:
     - users
     - apt
-    - dokku
+    - hostname
+    - nginx
+    - ANXS.postgresql
+    - django
