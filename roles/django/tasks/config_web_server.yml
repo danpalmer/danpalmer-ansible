@@ -13,6 +13,8 @@
   template: src=ssl_cert/{{app_name}}.crt dest=/etc/nginx/{{app_name}}/{{app_name}}.crt
   sudo: yes
   when: deploy_ssl
+  notify:
+    - restart nginx
 
 - name: write SSL nginx configuration
   template: src=nginx_ssl.conf.j2 dest=/etc/nginx/conf.d/{{app_name}}.conf
