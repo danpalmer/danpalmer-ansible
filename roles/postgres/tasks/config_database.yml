@@ -4,6 +4,16 @@
 #
 ---
 
+- name: update postgres access and listen for external hosts
+  sudo: yes
+  template: src=pg_hba.conf.j2 dest=/etc/postgresql/9.4/main/pg_hba.conf
+
+- name: update postgres configuration
+  sudo: yes
+  template: src=postgresql.conf.j2 dest=/etc/postgresql/9.4/main/postgresql.conf
+  notify:
+    - restart postgresql
+
 - name: ensure database is created
   sudo: yes
   sudo_user: postgres
@@ -18,13 +28,3 @@
   sudo: yes
   sudo_user: postgres
   postgresql_user: user={{dbuser}} role_attr_flags=NOSUPERUSER
-
-- name: update postgres access and listen for external hosts
-  sudo: yes
-  template: src=pg_hba.conf.j2 dest=/etc/postgresql/9.4/main/pg_hba.conf
-
-- name: update postgres configuration
-  sudo: yes
-  template: src=postgresql.conf.j2 dest=/etc/postgresql/9.4/main/postgresql.conf
-  notify:
-    - restart postgresql
