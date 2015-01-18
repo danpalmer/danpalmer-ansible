@@ -17,9 +17,17 @@ server {
   listen       443;
   server_name  www.{{root_domain_name}};
 
+  resolver 8.8.8.8 8.8.4.4 [2001:4860:4860::8888] [2001:4860:4860::8844];
+
   ssl                  on;
   ssl_certificate      /etc/nginx/{{app_name}}/{{app_name}}.crt;
   ssl_certificate_key  /etc/nginx/{{app_name}}/{{app_name}}.pem;
+
+  ssl_session_timeout 5m;
+
+  ssl_stapling on;
+  ssl_stapling_verify on;
+  ssl_trusted_certificate /etc/nginx/{{app_name}}/ca_certs.pem;
 
   ssl_protocols TLSv1.2;
   ssl_ciphers  ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:!aNULL:!eNULL:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS;
@@ -30,6 +38,8 @@ server {
   error_log /var/log/nginx/{{root_domain_name}}.error.log info;
 
   keepalive_timeout 5;
+
+  add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
 
   # nginx should serve up static files and never send to the WSGI server
   location /static {
