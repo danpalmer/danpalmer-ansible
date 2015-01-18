@@ -5,6 +5,5 @@
     - users
     - apt
     - hostname
-    - nginx
     - postgres
     - django
