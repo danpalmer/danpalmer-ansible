@@ -2,4 +2,4 @@
 - name: all
   hosts: all
   roles:
-    - update
+    - redeploy
