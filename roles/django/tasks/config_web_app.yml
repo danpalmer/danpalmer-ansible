@@ -39,14 +39,6 @@
                  settings={{django_settings}}
   environment: django_env_vars
 
-- name: Django syncdb
-  django_manage: command=syncdb
-                 app_path={{app_code_dir}}
-                 virtualenv={{virtualenv_dir}}
-                 settings={{django_settings}}
-  environment: django_env_vars
-
-
 - name: Django migrate
   django_manage: command=migrate
                  app_path={{app_code_dir}}
