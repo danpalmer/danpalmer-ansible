@@ -37,6 +37,8 @@ server {
   access_log /var/log/nginx/{{root_domain_name}}.access.log;
   error_log /var/log/nginx/{{root_domain_name}}.error.log info;
 
+  client_max_body_size 50m;
+
   keepalive_timeout 5;
 
   add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
