@@ -23,6 +23,13 @@
   notify:
     - restart nginx
 
+- name: write dhparams
+  template: src=dhparam.pem dest=/etc/ssl/certs/dhparam.pem
+  sudo: yes
+  when: deploy_ssl
+  notify:
+    - restart nginx
+
 - name: write SSL nginx configuration
   template: src=nginx_ssl.conf.j2 dest=/etc/nginx/conf.d/{{app_name}}.conf
   sudo: yes
