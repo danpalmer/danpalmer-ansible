@@ -4,6 +4,8 @@
   git: repo={{code_repository}} dest={{app_code_dir}} force=yes depth=1
   sudo: yes
   sudo_user: deploy
+  notify:
+    - restart supervisor
 
 - name: install web application dependencies listed in requirements.txt
   pip: requirements={{requirements_file}}
