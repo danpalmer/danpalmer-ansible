@@ -1,28 +1,5 @@
 ---
 
-- name: check if nginx ssl directory exists
-  stat: path=/etc/nginx/{{app_name}}
-  register: ssldir
-
-- name: create ssl directory for nginx if it does not already exist
-  command: mkdir /etc/nginx/{{app_name}}
-  sudo: yes
-  when: deploy_ssl and ssldir.stat.isdir is not defined
-
-- name: write SSL certificate
-  template: src=ssl_cert/{{app_name}}.crt dest=/etc/nginx/{{app_name}}/{{app_name}}.crt
-  sudo: yes
-  when: deploy_ssl
-  notify:
-    - restart nginx
-
-- name: write CA's certificates
-  template: src=ssl_cert/ca_certs.pem dest=/etc/nginx/{{app_name}}/ca_certs.pem
-  sudo: yes
-  when: deploy_ssl
-  notify:
-    - restart nginx
-
 - name: write dhparams
   template: src=dhparam.pem dest=/etc/ssl/certs/dhparam.pem
   sudo: yes
@@ -43,16 +20,6 @@
   when: not deploy_ssl
   notify:
     - restart nginx
-
-- name: write ssl certificate key
-  action: copy
-    content="{{ danpalmer_ssl_key }}"
-    dest=/etc/nginx/{{app_name}}/{{app_name}}.pem
-    mode=0600
-    owner=root
-    group=root
-  sudo: yes
-  when: deploy_ssl
 
 - name: check if nginx has default symbolic linked website file
   stat: path=/etc/nginx/sites-enabled/default
