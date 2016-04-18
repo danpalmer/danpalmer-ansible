@@ -2,6 +2,10 @@ users:
   - dan
   - deploy
 
+sudoers:
+  - dan
+  - deploy
+
 apt_packages:
   - bzip2
   - ca-certificates

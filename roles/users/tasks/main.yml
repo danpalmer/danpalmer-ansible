@@ -19,11 +19,16 @@
     with_items:
       users
 
-  - lineinfile: "dest=/etc/sudoers state=present regexp='^{{ item }}' line='{{ item }} ALL=(ALL) NOPASSWD: ALL'"
+  - name: Add users to sudoers
+    lineinfile:
+      dest=/etc/sudoers
+      state=present
+      regexp="^{{ item }}"
+      line="{{ item }} ALL=(ALL) NOPASSWD: ALL"
     with_items:
-      users
+      sudoers
 
-  - name: ~/.ssh/authorized_keys
+  - name: Set authorised keys
     action: copy
       src=authorized_keys/{{ item }}
       dest=/home/{{ item }}/.ssh/authorized_keys
@@ -33,7 +38,7 @@
     with_items:
       users
 
-  - name: Copy GitHub deploy public key
+  - name: Copy deploy public key
     action: copy
       content="{{ deploy_ssh_key_pub }}"
       dest=/home/deploy/.ssh/id_rsa.pub
@@ -41,7 +46,7 @@
       owner=deploy
       group=deploy
 
-  - name: Copy GitHub deploy private key
+  - name: Copy deploy private key
     action: copy
       content="{{ deploy_ssh_key }}"
       dest=/home/deploy/.ssh/id_rsa

@@ -1,5 +1,0 @@
----
-- name: all
-  hosts: all
-  roles:
-    - redeploy
