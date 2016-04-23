@@ -7,12 +7,12 @@ sudoers:
   - deploy
 
 apt_packages:
-  - bzip2
+  - build-essential
   - ca-certificates
+  - bzip2
   - curl
   - git
   - htop
-  - ipython
   - lsof
   - mosh
   - nmap
@@ -21,32 +21,5 @@ apt_packages:
   - unzip
   - zsh
   - fail2ban
-  - libxml2-dev
-  - libxslt1-dev
-  - build-essential
 
 hostname: "danpalmer.me"
-
-postgresql_databases:
-  - name: danpalmer
-
-
-app_name: danpalmer
-deploy_user: deploy
-
-dbname: "{{ app_name }}"
-dbuser: "{{ deploy_user }}"
-
-root_domain_name: danpalmer.me
-
-deploy_ssl: true
-code_repository: ssh://git@github.com/danpalmer/danpalmer.git
-virtualenv_dir: /home/{{ deploy_user }}/virtualenvs/{{ app_name }}/env
-app_code_dir: /home/{{ deploy_user }}/{{ app_name }}
-requirements_file: "{{ app_code_dir }}/requirements.txt"
-ssh_dir: /home/{{ deploy_user }}/.ssh
-# fixtures_file: "{{app_code_dir}}/core/fixtures/prod.json"
-
-django_settings_dir_name: "{{ app_name }}"
-django_settings: "{{ app_name }}.settings"
-staticfiles_dir: staticfiles
