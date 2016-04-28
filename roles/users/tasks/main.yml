@@ -1,51 +1,55 @@
 ---
   - name: Create users
     action: user
-      name="{{ item }}"
-      state=present
-      generate_ssh_key=yes
-      shell="/bin/bash"
+      name: "{{ item }}"
+      state: present
+      generate_ssh_key: yes
+      shell: /bin/bash
     with_items:
       users
 
   - name: Grant superuser access
     action: user
-      name="{{ item }}"
-      state=present
-      groups=sudo
-      append=yes
-      generate_ssh_key=yes
-      shell="/bin/bash"
+      name: "{{ item }}"
+      state: present
+      groups: sudo
+      append: yes
+      generate_ssh_key: yes
+      shell: /bin/bash
     with_items:
       users
 
   - name: Add users to sudoers
-    lineinfile: 'dest="/etc/sudoers" state=present regexp=^{{ item }} line="{{ item }} ALL=(ALL) NOPASSWD: ALL"'
+    lineinfile:
+      dest: /etc/sudoers
+      state: present
+      regexp: "^{{ item }}"
+      line: "{{ item }} ALL=(ALL) NOPASSWD: ALL"
     with_items:
       sudoers
 
   - name: Set authorised keys
     action: copy
-      src="authorized_keys/{{ item }}"
-      dest="/home/{{ item }}/.ssh/authorized_keys"
-      mode=0600
-      owner="{{ item }}"
-      group="{{ item }}"
+      src: "authorized_keys/{{ item }}"
+      dest: "/home/{{ item }}/.ssh/authorized_keys"
+      mode: 0600
+      owner: "{{ item }}"
+      group: "{{ item }}"
     with_items:
       users
 
   - name: Copy deploy public key
     action: copy
-      content="{{ deploy_ssh_key_pub }}"
-      dest="/home/deploy/.ssh/id_rsa.pub"
-      mode=0600
-      owner=deploy
-      group=deploy
+      content: "{{ deploy_ssh_key_pub }}"
+      dest: /home/deploy/.ssh/id_rsa.pub
+      mode: 0600
+      owner: deploy
+      group: deploy
 
   - name: Copy deploy private key
     action: copy
-      content="{{ deploy_ssh_key }}"
-      dest="/home/deploy/.ssh/id_rsa"
-      mode=0600
-      owner=deploy
-      group=deploy
+      content: "{{ deploy_ssh_key }}"
+      dest: /home/deploy/.ssh/id_rsa
+      mode: 0600
+      owner: deploy
+      group: deploy

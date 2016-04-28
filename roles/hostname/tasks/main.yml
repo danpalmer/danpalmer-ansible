@@ -1,4 +1,4 @@
 ---
   - name: Set Hostname
     hostname:
-      name={{ hostname }}
+      name: "{{ hostname }}"
