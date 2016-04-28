@@ -32,3 +32,4 @@
     apt:
       name: docker-engine
       update_cache: yes
+      state: latest
