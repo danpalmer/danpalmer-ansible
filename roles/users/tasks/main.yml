@@ -6,7 +6,7 @@
       generate_ssh_key: yes
       shell: /bin/bash
     with_items:
-      users
+      "{{ users }}"
 
   - name: Grant superuser access
     user:
@@ -17,7 +17,7 @@
       generate_ssh_key: yes
       shell: /bin/bash
     with_items:
-      users
+      "{{ users }}"
 
   - name: Add users to sudoers
     lineinfile:
@@ -26,7 +26,7 @@
       regexp: "^{{ item }}"
       line: "{{ item }} ALL=(ALL) NOPASSWD: ALL"
     with_items:
-      sudoers
+      "{{ sudoers }}"
 
   - name: Set authorised keys
     copy:
@@ -36,7 +36,7 @@
       owner: "{{ item }}"
       group: "{{ item }}"
     with_items:
-      users
+      "{{ users }}"
 
   - name: Copy deploy public key
     copy:
