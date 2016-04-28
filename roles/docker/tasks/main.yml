@@ -19,7 +19,7 @@
 
   - name: Add docker apt repo
     apt_repository:
-      repo: "deb https://apt.dockerproject.org/repo ubuntu- main"
+      repo: "deb https://apt.dockerproject.org/repo ubuntu-xenial main"
       state: present
 
   - name: Import the Docker repository key
