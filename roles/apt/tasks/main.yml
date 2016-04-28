@@ -1,6 +1,6 @@
 ---
   - name: Packages
-    action: apt
+    apt:
       pkg: "{{ item }}"
       update_cache: yes
       cache_valid_time=: 86400
