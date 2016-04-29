@@ -1,0 +1,79 @@
+---
+  - name: Install nginx
+    apt:
+      pkg: nginx
+      state: latest
+      update_cache: yes
+      cache_valid_time: 86400
+
+  - name: Install Let's Encrypt
+    apt:
+      pkg: letsencrypt
+      state: latest
+      update_cache: yes
+      cache_valid_time: 86400
+
+  - name: Nginx root configuration
+    copy:
+      src: nginx.conf
+      dest: /etc/nginx/nginx.conf
+      mode: 0644
+    notify:
+      restart nginx
+
+  - name: Nginx includes directory
+    file:
+      path: /etc/nginx/includes
+      state: directory
+
+  - name: Nginx configuration includes
+    copy:
+      src: includes/
+      dest: /etc/nginx/includes/
+      mode: 0644
+    notify:
+      restart nginx
+
+  - name: Nginx site configuration
+    copy:
+      src: sites/
+      dest: /etc/nginx/sites-enabled/
+      mode: 0644
+    notify:
+      restart nginx
+
+  - name: Make shared webroots for Let's Encrypt
+    file:
+      path: "/srv/letsencrypt/{{ item }}"
+      state: directory
+    with_items:
+      "{{ domains }}"
+
+  - name: Install missing Let's Encrypt certificates
+    command: "letsencrypt certonly --webroot -w /srv/letsencrypt/{{ item }} -d {{ item }} --non-interactive --agree-tos --email={{ admin_email }}"
+    args:
+      creates: "/etc/letsencrypt/live/{{ item }}/cert.pem"
+    with_items:
+      "{{ domains }}"
+
+  - name: Add Let's Encrypt renewal cron task
+    cron:
+      name: "Renew all Let's Encrypt certificates"
+      job: letsencrypt renew
+      special_time: daily
+
+  - name: Install shared htpasswd file
+    copy:
+      content: "{{ htpasswd_file }}"
+      dest: /etc/nginx/htpasswd
+    notify:
+      restart nginx
+
+  - name: Write dhparam file
+    copy:
+      src: dhparam.pem
+      dest: /etc/ssl/certs/dhparam.pem
+    become_user: root
+    become_method: sudo
+    notify:
+      restart nginx
