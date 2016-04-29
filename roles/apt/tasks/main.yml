@@ -1,5 +1,5 @@
 ---
-  - name: Packages
+  - name: Base system packages
     apt:
       pkg: "{{ item }}"
       state: latest
