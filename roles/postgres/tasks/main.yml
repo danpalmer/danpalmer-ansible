@@ -1,0 +1,11 @@
+---
+  - name: Postgres container
+    docker:
+      name: postgres
+      image: postgres:9.5.2
+      state: reloaded
+      pull: always
+      env:
+        POSTGRES_PASSWORD: "{{ database_password }}"
+      volumes:
+        - /var/lib/postgresql/data
