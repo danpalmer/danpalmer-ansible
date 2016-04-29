@@ -6,13 +6,10 @@
       update_cache: yes
       cache_valid_time: 86400
 
-  - name: Enable UFW
+  - name: Enable UFW rejecting by default
     ufw:
       state: enabled
-
-  - name: Reject all
-    ufw:
-      policy: reject
+      policy: deny
 
   - name: Allow SSH
     ufw:
