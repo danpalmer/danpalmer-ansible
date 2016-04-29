@@ -41,3 +41,12 @@
       name: docker-engine
       update_cache: yes
       state: latest
+
+  - name: Docker UI
+    docker:
+      image: dockerui/dockerui
+      privileged: yes
+      state: reloaded
+      pull: always
+      ports:
+        - "8001:9000"
