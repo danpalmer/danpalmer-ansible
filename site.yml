@@ -6,3 +6,4 @@
     - apt
     - hostname
     - docker
+    - postgres
