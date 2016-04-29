@@ -17,19 +17,27 @@
       state: present
       version: 1.1.0
 
-  # - name: Add docker apt repo
-  #   apt_repository:
-  #     repo: "deb https://apt.dockerproject.org/repo ubuntu-xenial main"
-  #     state: present
+  - name: Add docker apt repo
+    apt_repository:
+      repo: "deb https://apt.dockerproject.org/repo ubuntu-xenial main"
+      state: present
 
-  # - name: Import the Docker repository key
-  #   apt_key:
-  #     url: https://apt.dockerproject.org/gpg
-  #     state: present
-  #     id: 2C52609D
+  - name: Import the Docker repository key
+    apt_key:
+      url: https://apt.dockerproject.org/gpg
+      state: present
+      id: 2C52609D
+
+  - name: Install dmsetup
+    apt:
+      name: dmsetup
+      state: present
+
+  - name: dmsetup mknodes - for Docker
+    command: dmsetup mknodes
 
   - name: Install Docker package
     apt:
-      name: docker.io
+      name: docker-engine
       update_cache: yes
       state: latest
