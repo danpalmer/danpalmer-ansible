@@ -5,6 +5,8 @@
       image: postgres:9.5.2
       state: reloaded
       pull: always
+      restart_policy: always
+      restart_policy_retry: 5
       env:
         POSTGRES_PASSWORD: "{{ database_password }}"
       volumes:
