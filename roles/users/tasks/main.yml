@@ -53,3 +53,9 @@
       mode: 0600
       owner: deploy
       group: deploy
+
+  - name: Email admin on failed cron tasks
+    copy:
+      content: "MAILTO={{ admin_email }}"
+      dest: /etc/cron.d/mailto-admin
+      mode: 0644
