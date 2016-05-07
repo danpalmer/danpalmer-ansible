@@ -1,0 +1,67 @@
+---
+  - name: danpalmer.me web container
+    docker:
+      name: danpalmer
+      image: danpalmer/danpalmer
+      state: reloaded
+      pull: always
+      restart_policy: always
+      restart_policy_retry: 5
+      ports:
+        - "8002:80"
+      links:
+        - postgres
+      env:
+        SECRET_KEY: "{{ django_env_vars['SECRET_KEY'] }}"
+        PRODUCTION: "{{ django_env_vars['PRODUCTION'] }}"
+        DATABASE_HOST: "postgres"
+        DATABASE_NAME: "{{ django_env_vars['DATABASE_NAME'] }}"
+        DATABASE_USER: "{{ django_env_vars['DATABASE_USER'] }}"
+        DATABASE_PASSWORD: "{{ django_env_vars['DATABASE_PASSWORD'] }}"
+        SENTRY_DSN: "{{ django_env_vars['SENTRY_DSN'] }}"
+        AWS_ACCESS_KEY_ID: "{{ django_env_vars['AWS_ACCESS_KEY_ID'] }}"
+        AWS_S3_BUCKET_NAME: "{{ django_env_vars['AWS_S3_BUCKET_NAME'] }}"
+        AWS_SECRET_ACCESS_KEY: "{{ django_env_vars['AWS_SECRET_ACCESS_KEY'] }}"
+
+  - name: danpalmer.me mirgations
+    docker:
+      name: danpalmer-migrations
+      image: danpalmer/danpalmer
+      state: reloaded
+      pull: always
+      links:
+        - postgres
+      command: /app/manage.py migrate --noinput --fake-initial
+      detach: False
+      env:
+        SECRET_KEY: "{{ django_env_vars['SECRET_KEY'] }}"
+        PRODUCTION: "{{ django_env_vars['PRODUCTION'] }}"
+        DATABASE_HOST: "postgres"
+        DATABASE_NAME: "{{ django_env_vars['DATABASE_NAME'] }}"
+        DATABASE_USER: "{{ django_env_vars['DATABASE_USER'] }}"
+        DATABASE_PASSWORD: "{{ django_env_vars['DATABASE_PASSWORD'] }}"
+        SENTRY_DSN: "{{ django_env_vars['SENTRY_DSN'] }}"
+        AWS_ACCESS_KEY_ID: "{{ django_env_vars['AWS_ACCESS_KEY_ID'] }}"
+        AWS_S3_BUCKET_NAME: "{{ django_env_vars['AWS_S3_BUCKET_NAME'] }}"
+        AWS_SECRET_ACCESS_KEY: "{{ django_env_vars['AWS_SECRET_ACCESS_KEY'] }}"
+    register: migration_output
+
+  - debug:
+      var: migration_output.stdout_lines
+
+  - name: danpalmer.me nginx configuration
+    copy:
+      src: danpalmer.me.conf
+      dest: /etc/nginx/sites-enabled/danpalmer.me
+      mode: 0644
+    notify:
+      restart nginx
+
+  - name: www.danpalmer.me nginx configuration
+    copy:
+      src: www.danpalmer.me.conf
+      dest: /etc/nginx/sites-enabled/www.danpalmer.me
+      mode: 0644
+    notify:
+      - restart nginx
+      - add missing tls certs
