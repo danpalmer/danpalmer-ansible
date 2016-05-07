@@ -80,7 +80,7 @@
   - name: Docker UI nginx configuration
     copy:
       src: dockerui.nginx.conf
-      dest: /etc/nginx/sites-enabled/dockerui.conf
+      dest: /etc/nginx/sites-enabled/docker.danpalmer.me
       mode: 0644
     notify:
       restart nginx
