@@ -1,4 +1,9 @@
 ---
+  - name: Local postgres data directory
+    file:
+      path: /var/lib/postgresql/data
+      state: directory
+
   - name: Postgres container
     docker:
       name: postgres
@@ -10,4 +15,4 @@
       env:
         POSTGRES_PASSWORD: "{{ database_password }}"
       volumes:
-        - /var/lib/postgresql/data
+        - "/var/lib/postgresql/data:/var/lib/postgresql/data"
