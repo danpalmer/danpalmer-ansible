@@ -34,14 +34,6 @@
     notify:
       restart nginx
 
-  - name: Nginx site configuration
-    copy:
-      src: sites/
-      dest: /etc/nginx/sites-enabled/
-      mode: 0644
-    notify:
-      restart nginx
-
   - name: Make shared webroots for Let's Encrypt
     file:
       path: "/srv/letsencrypt/{{ item }}"
