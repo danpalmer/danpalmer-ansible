@@ -22,5 +22,6 @@ apt_packages:
   - unzip
   - zsh
   - fail2ban
+  - postgresql-client
 
 hostname: "danpalmer.me"
