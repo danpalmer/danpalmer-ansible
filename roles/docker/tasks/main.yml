@@ -15,7 +15,7 @@
     pip:
       name: docker-py
       state: present
-      version: 1.1.0
+      version: 1.10.6
 
   - name: Add docker apt repo
     apt_repository:
@@ -64,18 +64,19 @@
       restart docker
 
   - name: Docker UI
-    docker:
+    docker_container:
       name: dockerui
       image: kevan/dockerui
       privileged: yes
-      state: reloaded
-      pull: always
+      restart: true
+      state: started
+      pull: true
       restart_policy: always
-      restart_policy_retry: 5
+      restart_retries: 5
       ports:
         - "127.0.0.1:8001:9000"
       volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
+        - "/var/run/docker.sock:/var/run/docker.sock"
 
   - name: Docker UI nginx configuration
     copy:

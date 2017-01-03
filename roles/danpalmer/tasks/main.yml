@@ -1,12 +1,13 @@
 ---
   - name: danpalmer.me web container
-    docker:
+    docker_container:
       name: danpalmer
       image: danpalmer/danpalmer
-      state: reloaded
-      pull: always
+      restart: true
+      state: started
+      pull: true
       restart_policy: always
-      restart_policy_retry: 5
+      restart_retries: 5
       ports:
         - "8002:80"
       links:
@@ -26,11 +27,12 @@
       - danpalmer-deploy
 
   - name: danpalmer.me mirgations
-    docker:
+    docker_container:
       name: danpalmer-migrations
       image: danpalmer/danpalmer
-      state: reloaded
-      pull: always
+      restart: true
+      state: started
+      pull: true
       links:
         - postgres
       command: /app/manage.py migrate --noinput --fake-initial

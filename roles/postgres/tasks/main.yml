@@ -5,13 +5,14 @@
       state: directory
 
   - name: Postgres container
-    docker:
+    docker_container:
       name: postgres
       image: postgres:9.5.2
-      state: reloaded
-      pull: always
+      restart: true
+      state: started
+      pull: true
       restart_policy: always
-      restart_policy_retry: 5
+      restart_retries: 5
       env:
         POSTGRES_PASSWORD: "{{ database_password }}"
       volumes:
