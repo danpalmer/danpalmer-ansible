@@ -8,9 +8,7 @@
     docker_container:
       name: postgres
       image: postgres:9.5.2
-      restart: true
       state: started
-      pull: true
       restart_policy: always
       restart_retries: 5
       env:
