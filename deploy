@@ -1,1 +1,1 @@
-ansible-playbook -i hosts -u root site.yml --ask-vault-pass --tags "$1-deploy"
+ansible-playbook -u root site.yml --tags "$1-deploy"
