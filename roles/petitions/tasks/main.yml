@@ -6,7 +6,7 @@
 
   - name: petitions.fyi web container
     docker_container:
-      name: danpalmer
+      name: petitions
       image: danpalmer/petitions
       restart: true
       state: started
@@ -31,7 +31,7 @@
 
   - name: petitions.fyi queues container
     docker_container:
-      name: danpalmer
+      name: petitions-queues
       image: danpalmer/petitions
       restart: true
       state: started
@@ -53,7 +53,7 @@
 
   - name: petitions.fyi scheduler container
     docker_container:
-      name: danpalmer
+      name: petitions-scheduler
       image: danpalmer/petitions
       restart: true
       state: started
