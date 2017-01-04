@@ -57,7 +57,8 @@
       dest: /etc/nginx/sites-enabled/danpalmer.me
       mode: 0644
     notify:
-      restart nginx
+      - restart nginx
+      - add missing tls certs
 
   - name: www.danpalmer.me nginx configuration
     copy:
