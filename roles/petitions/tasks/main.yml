@@ -1,0 +1,91 @@
+---
+  - name: Check existence of TLS certificate
+    stat:
+      path: /etc/letsencrypt/live/petitions.danpalmer.me/fullchain.pem
+    register: petitions_certificate
+
+  - name: petitions.fyi web container
+    docker_container:
+      name: danpalmer
+      image: danpalmer/petitions
+      restart: true
+      state: started
+      pull: true
+      restart_policy: always
+      restart_retries: 5
+      ports:
+        - "8003:3000"
+      links:
+        - postgres
+      command: petitions
+      env:
+        APPROOT: "http://petitions.danpalmer.me"
+        PETITIONS_SESSION_SECRET_KEY: "{{ petitions_env_vars['PETITIONS_SESSION_SECRET_KEY'] }}"
+        MAILGUN_DOMAIN: "{{ petitions_env_vars['MAILGUN_DOMAIN'] }}"
+        MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
+        PGUSER: "{{ petitions_env_vars['PGUSER'] }}"
+        PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
+    tags:
+      - petitions-deploy
+
+  - name: petitions.fyi queues container
+    docker_container:
+      name: danpalmer
+      image: danpalmer/petitions
+      restart: true
+      state: started
+      pull: true
+      restart_policy: always
+      restart_retries: 5
+      links:
+        - postgres
+      command: petitions-queues
+      env:
+        PETITIONS_SESSION_SECRET_KEY: "{{ petitions_env_vars['PETITIONS_SESSION_SECRET_KEY'] }}"
+        MAILGUN_DOMAIN: "{{ petitions_env_vars['MAILGUN_DOMAIN'] }}"
+        MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
+        PGUSER: "{{ petitions_env_vars['PGUSER'] }}"
+        PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
+    tags:
+      - petitions-deploy
+
+  - name: petitions.fyi scheduler container
+    docker_container:
+      name: danpalmer
+      image: danpalmer/petitions
+      restart: true
+      state: started
+      pull: true
+      restart_policy: always
+      restart_retries: 5
+      ports:
+        - "8003:3000"
+      links:
+        - postgres
+      command: petitions-scheduler
+      env:
+        PETITIONS_SESSION_SECRET_KEY: "{{ petitions_env_vars['PETITIONS_SESSION_SECRET_KEY'] }}"
+        MAILGUN_DOMAIN: "{{ petitions_env_vars['MAILGUN_DOMAIN'] }}"
+        MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
+        PGUSER: "{{ petitions_env_vars['PGUSER'] }}"
+        PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
+    tags:
+      - petitions-deploy
+
+  - name: petitions.fyi nginx configuration
+    template:
+      src: petitions.fyi.conf
+      dest: /etc/nginx/sites-enabled/petitions.fyi
+      mode: 0644
+    notify:
+      - restart nginx
+      - add missing tls certs
+
+  - name: www.petitions.fyi nginx configuration
+    template:
+      src: www.petitions.fyi.conf
+      dest: /etc/nginx/sites-enabled/www.petitions.fyi
+      mode: 0644
+    notify:
+      - restart nginx
+      - add missing tls certs

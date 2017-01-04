@@ -8,5 +8,6 @@
     - docker
     - postgres
     - firewall
-    - nginx
     - danpalmer
+    - petitions
+    - nginx
