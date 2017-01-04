@@ -23,6 +23,7 @@
         AWS_ACCESS_KEY_ID: "{{ django_env_vars['AWS_ACCESS_KEY_ID'] }}"
         AWS_S3_BUCKET_NAME: "{{ django_env_vars['AWS_S3_BUCKET_NAME'] }}"
         AWS_SECRET_ACCESS_KEY: "{{ django_env_vars['AWS_SECRET_ACCESS_KEY'] }}"
+      log_driver: journald
     tags:
       - danpalmer-deploy
 
@@ -48,6 +49,7 @@
         AWS_ACCESS_KEY_ID: "{{ django_env_vars['AWS_ACCESS_KEY_ID'] }}"
         AWS_S3_BUCKET_NAME: "{{ django_env_vars['AWS_S3_BUCKET_NAME'] }}"
         AWS_SECRET_ACCESS_KEY: "{{ django_env_vars['AWS_SECRET_ACCESS_KEY'] }}"
+      log_driver: journald
     tags:
       - danpalmer-deploy
 

@@ -25,6 +25,7 @@
         MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
         PGUSER: "{{ petitions_env_vars['PGUSER'] }}"
         PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
+      log_driver: journald
     tags:
       - petitions-deploy
 
@@ -46,6 +47,7 @@
         MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
         PGUSER: "{{ petitions_env_vars['PGUSER'] }}"
         PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
+      log_driver: journald
     tags:
       - petitions-deploy
 
@@ -69,6 +71,7 @@
         MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
         PGUSER: "{{ petitions_env_vars['PGUSER'] }}"
         PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
+      log_driver: journald
     tags:
       - petitions-deploy
 
