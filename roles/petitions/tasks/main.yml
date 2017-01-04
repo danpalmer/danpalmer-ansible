@@ -60,8 +60,6 @@
       pull: true
       restart_policy: always
       restart_retries: 5
-      ports:
-        - "8003:3000"
       links:
         - postgres
       command: petitions-scheduler
