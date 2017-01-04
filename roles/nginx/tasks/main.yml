@@ -48,13 +48,6 @@
     with_items:
       "{{ domains }}"
 
-  - name: Install missing Let's Encrypt certificates
-    command: "letsencrypt certonly --webroot -w /srv/letsencrypt/{{ item }} -d {{ item }} --non-interactive --agree-tos --email={{ admin_email }}"
-    args:
-      creates: "/etc/letsencrypt/live/{{ item }}/cert.pem"
-    with_items:
-      "{{ domains }}"
-
   - name: Add Let's Encrypt renewal cron task
     cron:
       name: "Renew all Let's Encrypt certificates"

@@ -4,3 +4,11 @@
       name: nginx
       state: restarted
 
+  - name: add missing tls certs
+    command: "letsencrypt certonly --webroot -w /srv/letsencrypt/{{ item }} -d {{ item }} --non-interactive --agree-tos --email={{ admin_email }}"
+    args:
+      creates: "/etc/letsencrypt/live/{{ item }}/cert.pem"
+    with_items:
+      "{{ domains }}"
+    notify:
+      restart nginx
