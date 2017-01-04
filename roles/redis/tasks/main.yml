@@ -1,0 +1,17 @@
+---
+  - name: Local redis data directory
+    file:
+      path: /var/lib/redis/data
+      state: directory
+
+  - name: Redis container
+    docker_container:
+      name: redis
+      image: redis:3.2.6
+      state: started
+      pull: true
+      restart_policy: always
+      restart_retries: 5
+      volumes:
+        - "/var/lib/redis/data:/data"
+      log_driver: journald
