@@ -1,1 +1,1 @@
-163.172.153.123 ansible_user=dan ansible_become_user=root ansible_become=true
+163.172.153.123 ansible_become_user=root ansible_become=true

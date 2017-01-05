@@ -1,1 +1,1 @@
-ansible-playbook -u root site.yml --tags "$1-deploy"
+ansible-playbook site.yml --tags "$1-deploy" ${@:2}

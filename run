@@ -1,1 +1,1 @@
-ansible-playbook -u root $1.yml
+ansible-playbook $1.yml
