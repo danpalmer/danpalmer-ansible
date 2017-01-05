@@ -90,3 +90,35 @@
     notify:
       - restart nginx
       - add missing tls certs
+
+  - name: Sidekiq Web Dashboard
+    docker_container:
+      name: sidekiq-web
+      image: clok/standalone-sidekiq-web
+      restart: true
+      state: started
+      pull: true
+      restart_policy: always
+      restart_retries: 5
+      links:
+        - redis
+      ports:
+        - "8004:9292"
+      env:
+        REDIS_URL: redis://redis:6379/0
+        SIDEKIQ_USERNAME: "{{ sidekiq_web_username }}"
+        SIDEKIQ_PASSWORD: "{{ sidekiq_web_password }}"
+
+  - name: Check existence of sidekiq.danpalmer.me TLS certificate
+    stat:
+      path: /etc/letsencrypt/live/sidekiq.danpalmer.me/fullchain.pem
+    register: sidekiq_certificate
+
+  - name: sidekiq.danpalmer.me nginx configuration
+    template:
+      src: sidekiq.danpalmer.me.conf
+      dest: /etc/nginx/sites-enabled/sidekiq.danpalmer.me
+      mode: 0644
+    notify:
+      - restart nginx
+      - add missing tls certs
