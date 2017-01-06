@@ -28,59 +28,62 @@
         PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
         PGHOST: postgres
         STATIC_DIR: /static
+        REDIS_HOST: redis
       log_driver: journald
     tags:
       - petitions-deploy
 
-  - name: petitions.fyi queues container
-    docker_container:
-      name: petitions-queues
-      image: danpalmer/petitions
-      restart: true
-      state: started
-      pull: true
-      restart_policy: always
-      restart_retries: 5
-      links:
-        - postgres
-        - redis
-      command: petitions-queues
-      env:
-        PETITIONS_SESSION_SECRET_KEY: "{{ petitions_env_vars['PETITIONS_SESSION_SECRET_KEY'] }}"
-        MAILGUN_DOMAIN: "{{ petitions_env_vars['MAILGUN_DOMAIN'] }}"
-        MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
-        PGUSER: "{{ petitions_env_vars['PGUSER'] }}"
-        PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
-        PGHOST: postgres
-        STATIC_DIR: /static
-      log_driver: journald
-    tags:
-      - petitions-deploy
+  # - name: petitions.fyi queues container
+  #   docker_container:
+  #     name: petitions-queues
+  #     image: danpalmer/petitions
+  #     restart: true
+  #     state: started
+  #     pull: true
+  #     restart_policy: always
+  #     restart_retries: 5
+  #     links:
+  #       - postgres
+  #       - redis
+  #     command: petitions-queues
+  #     env:
+  #       PETITIONS_SESSION_SECRET_KEY: "{{ petitions_env_vars['PETITIONS_SESSION_SECRET_KEY'] }}"
+  #       MAILGUN_DOMAIN: "{{ petitions_env_vars['MAILGUN_DOMAIN'] }}"
+  #       MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
+  #       PGUSER: "{{ petitions_env_vars['PGUSER'] }}"
+  #       PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
+  #       PGHOST: postgres
+  #       STATIC_DIR: /static
+  #       REDIS_HOST: redis
+  #     log_driver: journald
+  #   tags:
+  #     - petitions-deploy
 
-  - name: petitions.fyi scheduler container
-    docker_container:
-      name: petitions-scheduler
-      image: danpalmer/petitions
-      restart: true
-      state: started
-      pull: true
-      restart_policy: always
-      restart_retries: 5
-      links:
-        - postgres
-        - redis
-      command: petitions-scheduler
-      env:
-        PETITIONS_SESSION_SECRET_KEY: "{{ petitions_env_vars['PETITIONS_SESSION_SECRET_KEY'] }}"
-        MAILGUN_DOMAIN: "{{ petitions_env_vars['MAILGUN_DOMAIN'] }}"
-        MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
-        PGUSER: "{{ petitions_env_vars['PGUSER'] }}"
-        PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
-        PGHOST: postgres
-        STATIC_DIR: /static
-      log_driver: journald
-    tags:
-      - petitions-deploy
+  # - name: petitions.fyi scheduler container
+  #   docker_container:
+  #     name: petitions-scheduler
+  #     image: danpalmer/petitions
+  #     restart: true
+  #     state: started
+  #     pull: true
+  #     restart_policy: always
+  #     restart_retries: 5
+  #     links:
+  #       - postgres
+  #       - redis
+  #     command: petitions-scheduler
+  #     env:
+  #       PETITIONS_SESSION_SECRET_KEY: "{{ petitions_env_vars['PETITIONS_SESSION_SECRET_KEY'] }}"
+  #       MAILGUN_DOMAIN: "{{ petitions_env_vars['MAILGUN_DOMAIN'] }}"
+  #       MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
+  #       PGUSER: "{{ petitions_env_vars['PGUSER'] }}"
+  #       PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
+  #       PGHOST: postgres
+  #       STATIC_DIR: /static
+  #       REDIS_HOST: redis
+  #     log_driver: journald
+  #   tags:
+  #     - petitions-deploy
 
   - name: petitions.fyi nginx configuration
     template:
