@@ -17,6 +17,7 @@
         - "8003:3000"
       links:
         - postgres
+        - redis
       command: petitions
       env:
         APPROOT: "http://petitions.danpalmer.me"
@@ -25,6 +26,8 @@
         MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
         PGUSER: "{{ petitions_env_vars['PGUSER'] }}"
         PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
+        PGHOST: postgres
+        STATIC_DIR: /static
       log_driver: journald
     tags:
       - petitions-deploy
@@ -40,6 +43,7 @@
       restart_retries: 5
       links:
         - postgres
+        - redis
       command: petitions-queues
       env:
         PETITIONS_SESSION_SECRET_KEY: "{{ petitions_env_vars['PETITIONS_SESSION_SECRET_KEY'] }}"
@@ -47,6 +51,8 @@
         MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
         PGUSER: "{{ petitions_env_vars['PGUSER'] }}"
         PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
+        PGHOST: postgres
+        STATIC_DIR: /static
       log_driver: journald
     tags:
       - petitions-deploy
@@ -62,6 +68,7 @@
       restart_retries: 5
       links:
         - postgres
+        - redis
       command: petitions-scheduler
       env:
         PETITIONS_SESSION_SECRET_KEY: "{{ petitions_env_vars['PETITIONS_SESSION_SECRET_KEY'] }}"
@@ -69,6 +76,8 @@
         MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
         PGUSER: "{{ petitions_env_vars['PGUSER'] }}"
         PGPASS: "{{ petitions_env_vars['PGPASS'] }}"
+        PGHOST: postgres
+        STATIC_DIR: /static
       log_driver: journald
     tags:
       - petitions-deploy
