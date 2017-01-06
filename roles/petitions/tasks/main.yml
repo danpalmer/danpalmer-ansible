@@ -20,7 +20,7 @@
         - redis
       command: petitions
       env:
-        APPROOT: "http://petitions.danpalmer.me"
+        APPROOT: "https://petitions.danpalmer.me"
         PETITIONS_SESSION_SECRET_KEY: "{{ petitions_env_vars['PETITIONS_SESSION_SECRET_KEY'] }}"
         MAILGUN_DOMAIN: "{{ petitions_env_vars['MAILGUN_DOMAIN'] }}"
         MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
