@@ -2,3 +2,5 @@
 dependencies:
   - role: docker
   - role: nginx
+  - role: postgres
+  - role: redis
