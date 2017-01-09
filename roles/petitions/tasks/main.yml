@@ -55,6 +55,7 @@
         PGHOST: postgres
         STATIC_DIR: /static
         REDIS_HOST: redis
+        QUEUE_THREADS: 10
       log_driver: journald
     tags:
       - petitions-deploy
