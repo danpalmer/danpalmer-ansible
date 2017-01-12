@@ -1,0 +1,84 @@
+---
+  - name: Check existence of TLS certificate
+    stat:
+      path: /etc/letsencrypt/live/grafana.danpalmer.me/fullchain.pem
+    register: grafana_certificate
+    tags:
+      - grafana-deploy
+
+  - name: Ensure /var/lib/grafana exists
+    file:
+      path: /var/lib/grafana
+      state: directory
+    tags:
+      - grafana-deploy
+
+  - name: grafana.danpalmer.me web container
+    docker_container:
+      name: grafana
+      image: grafana/grafana:4.1.0
+      restart: true
+      state: started
+      pull: true
+      restart_policy: always
+      restart_retries: 5
+      ports:
+        - "8005:3000"
+      links:
+        - prometheus
+      command: petitions
+      env:
+        GF_SECURITY_ADMIN_USER: "{{ grafana_env_vars['admin_user'] }}"
+        GF_SECURITY_ADMIN_PASSWORD: "{{ grafana_env_vars['admin_password'] }}"
+        GF_SECURITY_SECRET_KEY: "{{ grafana_env_vars['secret_key'] }}"
+      volumes:
+        - "/var/lib/grafana:/var/lib/grafana"
+      log_driver: journald
+    tags:
+      - grafana-deploy
+
+  - name: grafana.danpalmer.me nginx configuration
+    template:
+      src: grafana.danpalmer.me.conf
+      dest: /etc/nginx/sites-enabled/grafana.danpalmer.me
+      mode: 0644
+    notify:
+      - restart nginx
+      - add missing tls certs
+    tags:
+      - grafana-deploy
+
+  - name: Add Prometheus data source
+    uri:
+      url: http://localhost:8005/api/datasources
+      method: POST
+      body_format: json
+      status_code: 200,201,409
+      user: "{{ grafana_env_vars['admin_user'] }}"
+      password: "{{ grafana_env_vars['admin_password'] }}"
+      force_basic_auth: true
+      body:
+        name: Prometheus
+        type: prometheus
+        url: http://prometheus:9090
+        access: proxy
+        basicAuth: false
+    tags:
+      - grafana-deploy
+
+  - name: Ensure /var/lib/grafana/dashboards exists
+    file:
+      path: /var/lib/grafana/dashboards
+      state: directory
+    tags:
+      - grafana-deploy
+
+  - name: Copy Grafana Dashboards
+    copy:
+      src: "{{ item }}"
+      dest: /var/lib/grafana/dashboards/{{ item | basename }}
+    with_fileglob: dashboards/*.json*
+    tags:
+      - grafana-deploy
+    notify:
+      - restart grafana

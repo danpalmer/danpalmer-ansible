@@ -5,7 +5,7 @@
       state: restarted
 
   - name: add missing tls certs
-    command: "letsencrypt certonly --webroot -w /srv/letsencrypt/{{ item }} -d {{ item }} --non-interactive --agree-tos --email={{ admin_email }}"
+    command: "letsencrypt certonly --webroot -w /srv/letsencrypt/{{ item }} -d {{ item }} --non-interactive --agree-tos --email={{ admin_email }} && service nginx restart"
     args:
       creates: "/etc/letsencrypt/live/{{ item }}/cert.pem"
     with_items:
