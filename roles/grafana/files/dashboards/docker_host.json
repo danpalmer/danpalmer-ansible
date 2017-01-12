@@ -1,19 +1,18 @@
 {
-  "id": null,
-  "title": "Docker Host",
+  "annotations": {
+    "list": []
+  },
   "description": "Docker host metrics",
-  "tags": [
-    "system"
-  ],
-  "style": "dark",
-  "timezone": "browser",
   "editable": true,
+  "gnetId": null,
+  "graphTooltip": 1,
   "hideControls": false,
-  "sharedCrosshair": true,
+  "id": 3,
+  "links": [],
+  "refresh": "10s",
   "rows": [
     {
       "collapse": false,
-      "editable": true,
       "height": "100px",
       "panels": [
         {
@@ -37,9 +36,9 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
+          "hideTimeOverride": true,
           "id": 1,
           "interval": null,
-          "isNew": true,
           "links": [],
           "mappingType": 1,
           "mappingTypes": [
@@ -83,6 +82,7 @@
             }
           ],
           "thresholds": "",
+          "timeFrom": "10s",
           "title": "Uptime",
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -93,9 +93,7 @@
               "value": "null"
             }
           ],
-          "valueName": "avg",
-          "timeFrom": "10s",
-          "hideTimeOverride": true
+          "valueName": "avg"
         },
         {
           "cacheTimeout": null,
@@ -117,9 +115,9 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
+          "hideTimeOverride": true,
           "id": 13,
           "interval": null,
-          "isNew": true,
           "links": [],
           "mappingType": 1,
           "mappingTypes": [
@@ -164,6 +162,7 @@
             }
           ],
           "thresholds": "",
+          "timeFrom": "10s",
           "title": "CPU Idle",
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -174,9 +173,7 @@
               "value": "null"
             }
           ],
-          "valueName": "avg",
-          "timeFrom": "10s",
-          "hideTimeOverride": true
+          "valueName": "avg"
         },
         {
           "cacheTimeout": null,
@@ -198,9 +195,9 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
+          "hideTimeOverride": true,
           "id": 12,
           "interval": null,
-          "isNew": true,
           "links": [],
           "mappingType": 1,
           "mappingTypes": [
@@ -244,6 +241,7 @@
             }
           ],
           "thresholds": "",
+          "timeFrom": "10s",
           "title": "CPU Cores",
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -254,9 +252,7 @@
               "value": "null"
             }
           ],
-          "valueName": "avg",
-          "timeFrom": "10s",
-          "hideTimeOverride": true
+          "valueName": "avg"
         },
         {
           "cacheTimeout": null,
@@ -278,9 +274,9 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
+          "hideTimeOverride": true,
           "id": 2,
           "interval": null,
-          "isNew": true,
           "links": [],
           "mappingType": 1,
           "mappingTypes": [
@@ -325,6 +321,7 @@
             }
           ],
           "thresholds": "",
+          "timeFrom": "10s",
           "title": "Available Memory",
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -335,9 +332,7 @@
               "value": "null"
             }
           ],
-          "valueName": "avg",
-          "timeFrom": "10s",
-          "hideTimeOverride": true
+          "valueName": "avg"
         },
         {
           "cacheTimeout": null,
@@ -359,9 +354,9 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
+          "hideTimeOverride": true,
           "id": 3,
           "interval": null,
-          "isNew": true,
           "links": [],
           "mappingType": 1,
           "mappingTypes": [
@@ -405,6 +400,7 @@
             }
           ],
           "thresholds": "",
+          "timeFrom": "10s",
           "title": "Free Swap",
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -415,9 +411,7 @@
               "value": "null"
             }
           ],
-          "valueName": "avg",
-          "timeFrom": "10s",
-          "hideTimeOverride": true
+          "valueName": "avg"
         },
         {
           "cacheTimeout": null,
@@ -439,9 +433,9 @@
             "thresholdLabels": false,
             "thresholdMarkers": true
           },
+          "hideTimeOverride": true,
           "id": 4,
           "interval": null,
-          "isNew": true,
           "links": [],
           "mappingType": 1,
           "mappingTypes": [
@@ -486,6 +480,7 @@
             }
           ],
           "thresholds": "",
+          "timeFrom": "10s",
           "title": "Free Storage",
           "type": "singlestat",
           "valueFontSize": "80%",
@@ -496,16 +491,18 @@
               "value": "null"
             }
           ],
-          "valueName": "avg",
-          "timeFrom": "10s",
-          "hideTimeOverride": true
+          "valueName": "avg"
         }
       ],
-      "title": "Available resources"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Available resources",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "150px",
       "panels": [
         {
@@ -516,14 +513,8 @@
           "editable": true,
           "error": false,
           "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 9,
-          "isNew": true,
           "legend": {
             "avg": false,
             "current": false,
@@ -560,6 +551,7 @@
               "step": 10
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Load Average 1m",
@@ -571,7 +563,10 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -599,14 +594,8 @@
           "editable": true,
           "error": false,
           "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 10,
-          "isNew": true,
           "legend": {
             "avg": false,
             "current": false,
@@ -653,6 +642,7 @@
               "step": 10
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Processes",
@@ -664,7 +654,10 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -692,14 +685,8 @@
           "editable": true,
           "error": false,
           "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 11,
-          "isNew": true,
           "legend": {
             "avg": false,
             "current": false,
@@ -737,6 +724,7 @@
               "step": 10
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Interrupts",
@@ -748,7 +736,10 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -770,11 +761,15 @@
           ]
         }
       ],
-      "title": "Load"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Load",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
@@ -785,14 +780,8 @@
           "editable": true,
           "error": false,
           "fill": 4,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 5,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -826,6 +815,7 @@
               "step": 10
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "CPU Usage",
@@ -837,7 +827,10 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -859,11 +852,15 @@
           ]
         }
       ],
-      "title": "CPU"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "CPU",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
@@ -874,14 +871,8 @@
           "editable": true,
           "error": false,
           "fill": 4,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 6,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -952,6 +943,7 @@
               "step": 1
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Memory Usage",
@@ -963,7 +955,10 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -985,11 +980,15 @@
           ]
         }
       ],
-      "title": "Memory"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Memory",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
@@ -1000,14 +999,8 @@
           "editable": true,
           "error": false,
           "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 7,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -1071,6 +1064,7 @@
               "step": 1
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "I/O Usage",
@@ -1082,7 +1076,10 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -1104,11 +1101,15 @@
           ]
         }
       ],
-      "title": "I/O"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "I/O",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
@@ -1119,14 +1120,8 @@
           "editable": true,
           "error": false,
           "fill": 4,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 8,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -1168,6 +1163,7 @@
               "step": 1
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Network Usage",
@@ -1179,7 +1175,10 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -1201,11 +1200,15 @@
           ]
         }
       ],
-      "title": "Network"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Network",
+      "titleSize": "h6"
     },
     {
       "collapse": false,
-      "editable": true,
       "height": "250px",
       "panels": [
         {
@@ -1216,14 +1219,8 @@
           "editable": true,
           "error": false,
           "fill": 4,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 14,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -1274,6 +1271,7 @@
               "step": 10
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Swap Usage",
@@ -1285,7 +1283,10 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -1314,14 +1315,8 @@
           "editable": true,
           "error": false,
           "fill": 1,
-          "grid": {
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
+          "grid": {},
           "id": 15,
-          "isNew": true,
           "legend": {
             "alignAsTable": true,
             "avg": true,
@@ -1362,6 +1357,7 @@
               "step": 10
             }
           ],
+          "thresholds": [],
           "timeFrom": null,
           "timeShift": null,
           "title": "Swap I/O",
@@ -1373,7 +1369,10 @@
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -1395,9 +1394,22 @@
           ]
         }
       ],
-      "title": "New row"
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "New row",
+      "titleSize": "h6"
     }
   ],
+  "schemaVersion": 14,
+  "style": "dark",
+  "tags": [
+    "system"
+  ],
+  "templating": {
+    "list": []
+  },
   "time": {
     "from": "now-15m",
     "to": "now"
@@ -1427,15 +1439,7 @@
       "30d"
     ]
   },
-  "templating": {
-    "list": []
-  },
-  "annotations": {
-    "list": []
-  },
-  "refresh": "10s",
-  "schemaVersion": 12,
-  "version": 2,
-  "links": [],
-  "gnetId": null
+  "timezone": "browser",
+  "title": "Host",
+  "version": 0
 }
