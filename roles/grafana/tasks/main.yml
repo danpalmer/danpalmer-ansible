@@ -13,6 +13,20 @@
     tags:
       - grafana-deploy
 
+  - name: Ensure /etc/grafana exists
+    file:
+      path: /etc/grafana
+      state: directory
+    tags:
+      - grafana-deploy
+
+  - name: Copy Grafana configuration file
+    copy:
+      src: grafana.ini
+      dest: /etc/grafana/grafana.ini
+    tags:
+      - grafana-deploy
+
   - name: grafana.danpalmer.me web container
     docker_container:
       name: grafana
@@ -32,6 +46,7 @@
         GF_SECURITY_ADMIN_PASSWORD: "{{ grafana_env_vars['admin_password'] }}"
         GF_SECURITY_SECRET_KEY: "{{ grafana_env_vars['secret_key'] }}"
       volumes:
+        - "/etc/grafana:/etc/grafana"
         - "/var/lib/grafana:/var/lib/grafana"
       log_driver: journald
     tags:
