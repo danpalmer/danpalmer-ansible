@@ -1,0 +1,13 @@
+---
+  - name: nodeexporter container
+    docker_container:
+      name: nodeexporter
+      image: prom/node-exporter
+      restart: true
+      state: started
+      pull: true
+      restart_policy: always
+      restart_retries: 5
+      log_driver: journald
+    tags:
+      - prometheus-deploy

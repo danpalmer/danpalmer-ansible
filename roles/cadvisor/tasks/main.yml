@@ -1,0 +1,18 @@
+---
+  - name: cAdvisor container
+    docker_container:
+      name: cadvisor
+      image: "google/cadvisor:v0.24.1"
+      restart: true
+      state: started
+      pull: true
+      restart_policy: always
+      restart_retries: 5
+      volumes:
+        - "/:/rootfs:ro"
+        - "/var/run:/var/run:rw"
+        - "/sys:/sys:ro"
+        - "/var/lib/docker/:/var/lib/docker:ro"
+      log_driver: journald
+    tags:
+      - prometheus-deploy
