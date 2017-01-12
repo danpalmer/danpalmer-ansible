@@ -12,3 +12,7 @@
     - danpalmer
     - petitions
     - nginx
+    - prometheus
+    - grafana
+    - nodeexporter
+    - cadvisor
