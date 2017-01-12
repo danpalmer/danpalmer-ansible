@@ -1,0 +1,33 @@
+---
+  - name: Ensure /etc/prometheus dir exists
+    file:
+      path: /etc/prometheus
+      state: directory
+    tags:
+      - prometheus-deploy
+
+  - name: Prometheus configuration
+    copy:
+      src: prometheus.yml
+      dest: /etc/prometheus/prometheus.yml
+      mode: 0644
+    tags:
+      - prometheus-deploy
+
+  - name: Prometheus container
+    docker_container:
+      name: prometheus
+      image: prom/prometheus:v1.4.1
+      restart: true
+      state: started
+      restart_policy: always
+      restart_retries: 5
+      volumes:
+        - "/etc/prometheus:/etc/prometheus"
+        - "/var/lib/prometheus/data:/prometheus"
+      links:
+        - cadvisor
+        - nodeexporter
+      log_driver: journald
+    tags:
+      - prometheus-deploy

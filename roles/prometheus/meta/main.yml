@@ -1,0 +1,5 @@
+---
+dependencies:
+  - role: docker
+  - role: cadvisor
+  - role: nodeexporter
