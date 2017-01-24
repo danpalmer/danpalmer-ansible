@@ -1,0 +1,26 @@
+---
+  - name: monzo.danpalmer.me web container
+    docker_container:
+      name: monzo
+      image: danpalmer/monzo
+      restart: true
+      state: started
+      pull: true
+      restart_policy: always
+      restart_retries: 5
+      ports:
+        - "8006:80"
+      log_driver: journald
+    tags:
+      - monzo-deploy
+
+  - name: monzo.danpalmer.me nginx configuration
+    copy:
+      src: monzo.danpalmer.me.conf
+      dest: /etc/nginx/sites-enabled/monzo.danpalmer.me
+      mode: 0644
+    tags:
+      - monzo-deploy
+    notify:
+      - restart nginx
+      - add missing tls certs

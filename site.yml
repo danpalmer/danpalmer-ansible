@@ -16,3 +16,4 @@
     - grafana
     - nodeexporter
     - cadvisor
+    - monzo
