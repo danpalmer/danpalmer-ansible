@@ -1,7 +1,7 @@
 ---
   - name: Check existence of TLS certificate
     stat:
-      path: /etc/letsencrypt/live/petitions.danpalmer.me/fullchain.pem
+      path: /etc/letsencrypt/live/petitions.fyi/fullchain.pem
     register: petitions_certificate
 
   - name: petitions.fyi web container
@@ -20,7 +20,7 @@
         - redis
       command: petitions
       env:
-        APPROOT: "https://petitions.danpalmer.me"
+        APPROOT: "https://petitions.fyi"
         PETITIONS_SESSION_SECRET_KEY: "{{ petitions_env_vars['PETITIONS_SESSION_SECRET_KEY'] }}"
         MAILGUN_DOMAIN: "{{ petitions_env_vars['MAILGUN_DOMAIN'] }}"
         MAILGUN_API_KEY: "{{ petitions_env_vars['MAILGUN_API_KEY'] }}"
