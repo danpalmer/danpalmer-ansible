@@ -51,7 +51,7 @@
   - name: Add Let's Encrypt renewal cron task
     cron:
       name: "Renew all Let's Encrypt certificates"
-      job: letsencrypt renew
+      job: letsencrypt renew && service nginx restart
       special_time: daily
 
   - name: Install shared htpasswd file
