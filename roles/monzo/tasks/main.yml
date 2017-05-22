@@ -22,7 +22,7 @@
       - monzo-deploy
 
   - name: monzo.danpalmer.me nginx configuration
-    copy:
+    template:
       src: monzo.danpalmer.me.conf
       dest: /etc/nginx/sites-enabled/monzo.danpalmer.me
       mode: 0644
