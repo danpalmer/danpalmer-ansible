@@ -9,7 +9,7 @@
   - name: monzo.danpalmer.me web container
     docker_container:
       name: monzo
-      image: danpalmer/monzo
+      image: danpalmer/monzo-web
       restart: true
       state: started
       pull: true
