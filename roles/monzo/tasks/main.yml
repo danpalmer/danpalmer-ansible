@@ -1,4 +1,11 @@
 ---
+  - name: Check existence of TLS certificate
+    stat:
+      path: /etc/letsencrypt/live/monzo.danpalmer.me/fullchain.pem
+    register: monzo_certificate
+    tags:
+      - monzo-deploy
+
   - name: monzo.danpalmer.me web container
     docker_container:
       name: monzo
@@ -22,5 +29,5 @@
     tags:
       - monzo-deploy
     notify:
-      - restart nginx
       - add missing tls certs
+      - restart nginx
