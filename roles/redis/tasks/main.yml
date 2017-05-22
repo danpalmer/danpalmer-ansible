@@ -9,7 +9,7 @@
       name: redis
       image: redis:3.2.6
       state: started
-      restart_policy: always
+      restart_policy: on-failure
       restart_retries: 5
       volumes:
         - "/var/lib/redis/data:/data"

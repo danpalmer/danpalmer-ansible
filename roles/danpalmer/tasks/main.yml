@@ -6,7 +6,7 @@
       restart: true
       state: started
       pull: true
-      restart_policy: always
+      restart_policy: on-failure
       restart_retries: 5
       ports:
         - "8002:80"

@@ -20,7 +20,7 @@
       image: prom/prometheus:v1.4.1
       restart: true
       state: started
-      restart_policy: always
+      restart_policy: on-failure
       restart_retries: 5
       volumes:
         - "/etc/prometheus:/etc/prometheus"

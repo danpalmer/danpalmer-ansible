@@ -11,7 +11,7 @@
       restart: true
       state: started
       pull: true
-      restart_policy: always
+      restart_policy: on-failure
       restart_retries: 5
       ports:
         - "8003:3000"
@@ -40,7 +40,7 @@
       restart: true
       state: started
       pull: true
-      restart_policy: always
+      restart_policy: on-failure
       restart_retries: 5
       links:
         - postgres
@@ -67,7 +67,7 @@
       restart: true
       state: started
       pull: true
-      restart_policy: always
+      restart_policy: on-failure
       restart_retries: 5
       links:
         - postgres
@@ -111,7 +111,7 @@
       restart: true
       state: started
       pull: true
-      restart_policy: always
+      restart_policy: on-failure
       restart_retries: 5
       links:
         - redis

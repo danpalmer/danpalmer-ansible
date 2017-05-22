@@ -9,7 +9,7 @@
       name: postgres
       image: postgres:9.5.2
       state: started
-      restart_policy: always
+      restart_policy: on-failure
       restart_retries: 5
       env:
         POSTGRES_PASSWORD: "{{ database_password }}"
