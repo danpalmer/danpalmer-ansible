@@ -3,3 +3,7 @@
   service:
     name: docker
     state: restarted
+
+- name: daemon-reload
+  shell: systemctl daemon-reload
+  become_user: root

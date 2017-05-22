@@ -11,9 +11,6 @@
     easy_install:
       name=pip
 
-  - name: Install Aufs
-    shell: sudo apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual
-
   - name: Install docker-py
     pip:
       name: docker-py
@@ -45,26 +42,28 @@
       update_cache: yes
       state: latest
 
-  - name: Add Docker environment file
-    copy:
-      src: docker_config
-      dest: /etc/default/docker
-      mode: 0644
-    notify:
-      restart docker
-
   - name: Ensure /etc/systemd/system/docker.service.d dir exists
     file:
       path: /etc/systemd/system/docker.service.d
       state: directory
 
-  - name: Add systemd override for EnvironmentFile
+  - name: Add systemd override for Environment
     copy:
       src: override-docker.conf
       dest: /etc/systemd/system/docker.service.d/override-docker.conf
       mode: 0644
-    notify:
-      restart docker
+    register: docker_env
+
+  - name: Reload systemd
+    when: docker_env.changed
+    shell: systemctl daemon-reload
+    become_user: root
+
+  - name: Restart Docker
+    when: docker_env.changed
+    service:
+      name: docker
+      state: restarted
 
   - name: Docker UI
     docker_container:
