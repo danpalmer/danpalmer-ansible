@@ -11,6 +11,9 @@
     easy_install:
       name=pip
 
+  - name: Install Aufs
+    shell: sudo apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual
+
   - name: Install docker-py
     pip:
       name: docker-py
